@@ -1,0 +1,23 @@
+email:
+  btn-link: ${spring.mail.public-url}
+  photo-link: ${spring.mail.public-url}/api/file/
+  props:
+    fr:
+      reset-password:
+        subject: "Demande de réinitialisation de mot de passe - ${initial.region.fr.roleTrade}"
+        btn-text: RÉINITIALISER MAINTENANT
+        btn-link: ${spring.mail.public-url}/reset?token=
+        body-text: |
+          <div style="text-align: left;">
+              Cher(e) [NAME],
+              <br><br>
+              Une demande a été reçue pour changer le mot de passe de votre compte sur le portail de négociation des services d'échange de ${initial.region.fr.roleName}.
+              <br><br>
+              Si vous n'avez pas initié cette demande, veuillez nous contacter immédiatement à
+              <a href="[supportMail]">[supportMail]</a>
+              <br><br>
+              Signature,
+              <br>
+              ${initial.region.fr.roleLabel}
+              <br><br>
+          </div>

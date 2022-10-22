@@ -1,0 +1,93 @@
+SPRING_PROFILES: dev
+
+# Application properties
+application:
+  public-url: ${PUBLIC_URL:https://aml.peaqock.com}
+  form-url: ${application.public-url}/main/kyc/client/
+  platform-name: PEAQOCK AML Services # the name of the platform
+
+spring:
+  application:
+    name: aml-backend
+  profiles:
+    include: ${SPRING_PROFILES:test}
+  # DATASOURCE POSTGRESQL CONFIG
+  datasource:
+    url: jdbc:postgresql://${DATABASE_HOST:127.0.0.1}:${DATABASE_PORT:5432}/${DATABASE_NAME:paymenthubdb}
+    username: ${DATABASE_USERNAME:test}
+    password: ${DATABASE_PASSWORD:test}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      idle-timeout: 600000
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: ${JPA_HIBERNATE_DDL:update}
+    properties:
+      hibernate:
+        jdbc.batch_size: 30
+        order_inserts: true
+        jdbc.time_zone: UTC
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        types.print.banner: false
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    test-connection: false
+    public-url: ${application.public-url} # the public url of platform must be http or https and doesn't and with "/"
+    platform-name: ${application.platform-name} # the name of the platform
+    form-url: ${application.form-url} # the name of the platform
+    from:
+      personal: PEAQOCK Team # the name of the person who will send the mail
+      address: no-reply@peaqock.com # valid email address
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+auth:
+  jwt:
+    key-store: file:keys/jwt.jks
+    key-alias: jwt
+    key-password: password
+    issuer: issuer
+
+data.init:
+  users:
+    - firstName: peaqock
+      lastName: test
+      username: test@peaqock.com
+      password: admin
+      role: AML_ADMIN
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    use-root-path: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # refresh, bus-refresh, beans, env
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: ALWAYS
+
+
+#Config file manager
+file-manager:
+  file-store: file:storage
+
+

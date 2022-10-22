@@ -1,0 +1,18 @@
+## DATABASE ENV ##
+DATABASE_HOST: peaqock.com
+DATABASE_PORT: 54320
+DATABASE_NAME: test_aml
+DATABASE_USERNAME: peaqock
+DATABASE_PASSWORD: peAqockPostgres312
+
+#DATABASE_HOST: data.peaqock.com
+#DATABASE_PORT: 60045
+#DATABASE_NAME: RMA_filtrage
+#DATABASE_USERNAME: postgres
+#DATABASE_PASSWORD: rootroot
+
+## SMTP ENV ##
+MAIL_HOST: ssl0.ovh.net
+MAIL_PORT: 587
+MAIL_USERNAME: afx-mansa@peaqock.com
+MAIL_PASSWORD: m8bxygBm6El1sJ0

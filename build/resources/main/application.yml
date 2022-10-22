@@ -1,0 +1,117 @@
+SPRING_PROFILES: dev
+
+# Application properties
+application:
+  public-url: ${PUBLIC_URL:https://aml.peaqock.com}
+  form-url: ${application.public-url}/main/kyc/client/
+  platform-name: PEAQOCK AML Services # the name of the platform
+  logo-path:  # the path of the logo in the emails
+  from:
+    personal: AML Trade In Services Portal Team # the name of the person who will send the mail
+    address: no-reply@peaqock.com # valid email address
+    enquiries: 'enquiries-example@aml.org'
+    admins: 'example@aml.org'
+
+# Application Initial Configuration
+initial:
+  names:
+    first-name: Enzo,Lucas,Mathis,Nathan,Thomas,Hugo,Théo,Tom,Louis,Raphaël,Clément,Léo,Mathéo,Maxime,Alexandre,Antoine,Yanis,Paul,Baptiste,Alexis,Gabriel,Arthur,Jules,Ethan,Noah,Quentin,Axel,Evan,Mattéo,Romain,Valentin,Maxence,Noa,Adam,Nicolas,Julien,Mael,Pierre,Rayan,Victor,Mohamed,Adrien,Kylian,Sacha,Benjamin,Léa,Clara,Manon,Chloé,Camille,Ines,Sarah,Jade,Lola,Anaïs,Lucie,Océane,Lilou,Marie,Eva,Romane,Lisa,Zoe,Julie,Mathilde,Louise,Juliette,Clémence,Célia,Laura,Lena,Maëlys,Charlotte,Ambre,Maeva,Pauline,Lina,Jeanne,Lou,Noémie,Justine,Louna,Elisa,Alice,Emilie,Carla,Maëlle,Alicia,Mélissa
+    last-name: Martin,Bernard,Dubois,Thomas,Robert,Richard,Petit,Durand,Leroy,Moreau,Simon,Laurent,Lefèvre,Michel,Garcia,David,Bertrand,Roux,Vincent,Fournier,Morel,Girard,André,Lévêque,Mercier,Dupont,Lambert,Bonnet,Francois,Martinez,Legrand,Garnier,Faure,Rousseau,Blanc,Guérin,Muller,Henry,Roussel,Nicolas,Perrin,Morin,Mathieu,Clément,Gauthier,Dumont,Lopéz,Fontaine,Chevalier,Robin,Masson,Sanchez,Gérard,Nguyen,Boyer,Dvnis,Lemaire,Duval,Joly,Gautier,Roger,Roche,Roy,Noël,Meyer,Lucas,Méunier,Jean,Perez,Marchand,Dufour,Blanchard,Marie,Barbier,Brun,Dumas,Brunet,Schmitt,Leroux,Colin,Fernandez,Pierre,Renard,Arnaud,Rolland,Caron,Aubert,Giraud,Leclerc,Vidal,Bourgeois,Renaud,Lemoine,Picard,Gaillard,Philippe,Leclercq,Lacroix,Fabre,Dupuis,Olivier,Rodriguez,Da silva,Hubert,Louis,Charles,Guillot,Rivière,Le gall,Guillaume,Adam,Rey,Moulin,Gonzalez,Berger,Lecomte,Ménard,Fleury,Deschamps,Carpentier,Julien,Benoit,Paris,Maillard,Marchal,Aubry,Vasseur,Le roux,Renault,Jacquet,Collet,Prévost,Poirier,Charpentier,Royer,Huet,Baron,Dupuy,Pons,Paul,Laine,Carre,Breton,Rémy,Schneider,Perrot,Guyot,Barre,Marty,Cousin
+  languages:
+    - lng: en
+    - lng: fr
+  region:
+    fr:
+      roleName: AML
+      roleLabel: la secretariat de AML
+      roleTrade: Portail de commerce des services de AML
+    en:
+      roleName: AML
+      roleLabel: AML Secretariat
+      roleTrade: AML Trade In Services Portal
+
+spring:
+  application:
+    name: aml-backend
+  profiles:
+    include: ${SPRING_PROFILES:test}
+  # DATASOURCE POSTGRESQL CONFIG
+  datasource:
+    url: jdbc:postgresql://${DATABASE_HOST:127.0.0.1}:${DATABASE_PORT:5432}/${DATABASE_NAME:test_aml}
+    username: ${DATABASE_USERNAME:test}
+    password: ${DATABASE_PASSWORD:test}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      idle-timeout: 600000
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: ${JPA_HIBERNATE_DDL:update}
+    properties:
+      hibernate:
+        jdbc.batch_size: 30
+        order_inserts: true
+        jdbc.time_zone: UTC
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        types.print.banner: false
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    test-connection: false
+    public-url: ${application.public-url} # the public url of platform must be http or https and doesn't and with "/"
+    platform-name: ${application.platform-name} # the name of the platform
+    form-url: ${application.form-url} # the name of the platform
+    from:
+      personal: PEAQOCK Team # the name of the person who will send the mail
+      address: no-reply@peaqock.com # valid email address
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+auth:
+  jwt:
+    key-store: file:keys/jwt.jks
+    key-alias: jwt
+    key-password: password
+    issuer: issuer
+
+data.init:
+  users:
+    - firstName: peaqock
+      lastName: test
+      username: admin@yopmail.com
+      password: admin
+      role: AML_ADMIN
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    use-root-path: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # refresh, bus-refresh, beans, env
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: ALWAYS
+
+
+#Config file manager
+file-manager:
+  file-store: file:storage
+
+

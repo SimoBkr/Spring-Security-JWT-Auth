@@ -1,0 +1,85 @@
+{
+  "groups": [
+    {
+      "name": "auth",
+      "type": "com.peaqock.aml.config.AuthProps",
+      "sourceType": "com.peaqock.aml.config.AuthProps"
+    },
+    {
+      "name": "auth.jwt",
+      "type": "com.peaqock.aml.config.AuthProps$Jwt",
+      "sourceType": "com.peaqock.aml.config.AuthProps",
+      "sourceMethod": "getJwt()"
+    },
+    {
+      "name": "data.init",
+      "type": "com.peaqock.aml.dto.DataInit",
+      "sourceType": "com.peaqock.aml.dto.DataInit"
+    },
+    {
+      "name": "email.props",
+      "type": "com.peaqock.aml.config.EmailProps",
+      "sourceType": "com.peaqock.aml.config.EmailProps"
+    },
+    {
+      "name": "email.props.fr",
+      "type": "com.peaqock.aml.config.EmailProps$EmailLng",
+      "sourceType": "com.peaqock.aml.config.EmailProps",
+      "sourceMethod": "getFr()"
+    },
+    {
+      "name": "file-manager",
+      "type": "com.peaqock.aml.config.FileManagerProp",
+      "sourceType": "com.peaqock.aml.config.FileManagerProp"
+    }
+  ],
+  "properties": [
+    {
+      "name": "auth.jwt.access-token-validity",
+      "type": "java.time.Duration",
+      "sourceType": "com.peaqock.aml.config.AuthProps$Jwt",
+      "defaultValue": "1h"
+    },
+    {
+      "name": "auth.jwt.issuer",
+      "type": "java.lang.String",
+      "sourceType": "com.peaqock.aml.config.AuthProps$Jwt",
+      "defaultValue": "issuer"
+    },
+    {
+      "name": "auth.jwt.key-alias",
+      "type": "java.lang.String",
+      "description": "The alias of the key from the key store",
+      "sourceType": "com.peaqock.aml.config.AuthProps$Jwt"
+    },
+    {
+      "name": "auth.jwt.key-password",
+      "type": "java.lang.String",
+      "description": "The password of the key from the key store",
+      "sourceType": "com.peaqock.aml.config.AuthProps$Jwt"
+    },
+    {
+      "name": "auth.jwt.key-store",
+      "type": "org.springframework.core.io.Resource",
+      "description": "The location of the key store.",
+      "sourceType": "com.peaqock.aml.config.AuthProps$Jwt"
+    },
+    {
+      "name": "data.init.users",
+      "type": "java.util.List<com.peaqock.aml.dto.DataInit$UserInit>",
+      "sourceType": "com.peaqock.aml.dto.DataInit"
+    },
+    {
+      "name": "email.props.fr.reset-password",
+      "type": "com.peaqock.aml.dto.EmailPropDto",
+      "sourceType": "com.peaqock.aml.config.EmailProps$EmailLng"
+    },
+    {
+      "name": "file-manager.file-store",
+      "type": "org.springframework.core.io.Resource",
+      "description": "The location of the file store.",
+      "sourceType": "com.peaqock.aml.config.FileManagerProp"
+    }
+  ],
+  "hints": []
+}

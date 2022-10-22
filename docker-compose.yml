@@ -1,0 +1,16 @@
+version: '3.9'
+
+networks:
+  main-network:
+    name: main-network
+    external: false
+    driver: bridge
+
+services:
+
+  aml-backend:
+    image: ghcr.io/peaqock-financials/aml-backend
+    container_name: aml-backend
+    networks:
+      - main-network
+    restart: always
